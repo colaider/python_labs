@@ -48,7 +48,6 @@ class DoubleLinkedList:
                 self.tail.next = item
                 item.previous = self.tail
                 self.tail = item
-
         return
 
     def remove_list_item_by_id(self, item_id):
@@ -74,37 +73,35 @@ class DoubleLinkedList:
 
 
 
-    def sortedInsert(self, head_ref, newNode):
-        current = None
+    def sorted_insert(self, head_ref, new_node):
         if (head_ref == None):
-            head_ref = newNode
+            head_ref = new_node
 
-        elif (head_ref.data.get_stage() >= newNode.data.get_stage()):
-            newNode.next = head_ref
-            newNode.next.previous = newNode
-            head_ref = newNode
+        elif (head_ref.data.get_stage() >= new_node.data.get_stage()):
+            new_node.next = head_ref
+            new_node.next.previous = new_node
+            head_ref = new_node
 
         else:
             current = head_ref
             # find not after what we ant to indsrt something
-            while (current.next != None and current.next.data.get_stage() < newNode.data.get_stage()):
+            while (current.next != None and current.next.data.get_stage() < new_node.data.get_stage()):
                 current = current.next
 
-            newNode.next = current.next
-            #if we not find plae wher we want to pu node put at the and
+            new_node.next = current.next
+            #if we not find place wher we want to put node put it at the and
             if (current.next != None):
-                newNode.next.previous = newNode
+                new_node.next.previous = new_node
 
-            current.next = newNode
-            newNode.previous = current
+            current.next = new_node
+            new_node.previous = current
 
         return head_ref
 
-    def insertionSort(self, head_ref):
+    def insertion_sort(self, head_ref):
         sorted = None
         current = head_ref
         if(head_ref.data.get_stage() > current.next.data.get_stage()):
-            print("hui")
             temp = head_ref.data
             head_ref.data = current.next.data
             current.next.data = temp
@@ -113,8 +110,8 @@ class DoubleLinkedList:
             next = current.next
             current.previous = current.next = None
 
-            #inset this shit in list
-            sorted = self.sortedInsert(sorted, current)
+            #insert this shit in list
+            sorted = self.sorted_insert(sorted, current)
             current = next
         head_ref = sorted
 
